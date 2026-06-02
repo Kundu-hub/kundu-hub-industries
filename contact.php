@@ -18,29 +18,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // SMTP SETTINGS
+
+        // SMTP SETTINGS (HOSTINGER)
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'smtp.hostinger.com';
         $mail->SMTPAuth = true;
 
-        // YOUR EMAIL (CHANGE THIS)
-        $mail->Username = 'yourgmail@gmail.com';
-        $mail->Password = 'your-app-password'; // NOT normal password
+        // YOUR HOSTINGER EMAIL
+        $mail->Username = 'info@kunduindustries.com';
+        $mail->Password = 'VerifiedDomain@29';
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // EMAIL SETTINGS
-        $mail->setFrom('yourgmail@gmail.com', 'Kundu Industrial Website');
+        $mail->setFrom('info@kunduindustries.com', 'Kundu Industrial Website');
         $mail->addAddress('info@kunduindustries.com');
 
         $mail->addReplyTo($email, $name);
 
         $mail->isHTML(true);
-        $mail->Subject = "New Contact Form: $subject";
+        $mail->Subject = "New Enquiry: $subject";
 
         $mail->Body = "
-        <h3>New Contact Message</h3>
+        <h3>New Contact Form Submission</h3>
         <p><b>Name:</b> $name</p>
         <p><b>Email:</b> $email</p>
         <p><b>Phone:</b> $phone</p>
@@ -53,10 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<h2>Message sent successfully!</h2><a href='contact.html'>Back</a>";
 
     } catch (Exception $e) {
-        echo "Message could not be sent. Error: {$mail->ErrorInfo}";
+        echo "Message failed: {$mail->ErrorInfo}";
     }
 
-} else {
-    echo "Invalid request.";
 }
 ?>
